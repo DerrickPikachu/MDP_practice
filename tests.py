@@ -12,10 +12,11 @@ if __name__ == "__main__":
     while not coinGame.gameOver:
         stackCoin = randint(0, coinGame.showState())
         coinGame.stack(stackCoin)
-        reward = coinGame.flipCoin()
+        result = coinGame.flipCoin()
         print('stack {} coins'.format(stackCoin))
-        print('reward: {}'.format(reward))
+        print('result: {}'.format(result))
         print('new state: {}'.format(coinGame.showState()))
         print('------------------------')
 
     print('game over!')
+    print('reward: {}'.format(coinGame.reward))

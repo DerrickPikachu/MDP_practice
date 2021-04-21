@@ -12,28 +12,32 @@ class Game:
         self.playerMoney = randint(10, 40)
         self.stackedMoney = 0
         self.gameOver = False
+        self.reward = 0
 
-    def flipCoin(self) -> int:
+    def flipCoin(self) -> bool:
         if self.gameOver:
             print('Game has been stopped')
         shoot = random()
-        # isWin = True if shoot <= self.headProb else False
+        isWin = True if shoot <= self.headProb else False
 
         # Check is head or not, and setup the reward.
         # The reward is according to the winning money of this play
-        if shoot <= self.headProb:
-            reward = self.stackedMoney
+        if isWin:
+            self.playerMoney += self.stackedMoney
         else:
-            reward = -self.stackedMoney
-        self.playerMoney += reward
+            self.playerMoney -= self.stackedMoney
 
         # Check the game over condition
         if self.playerMoney >= 100 or self.playerMoney == 0:
             self.gameOver = True
+            if self.playerMoney == 0:
+                self.reward = -1
+            else:
+                self.reward = 1
 
         # Reset the staked money, prepare for next play
         self.stackedMoney = 0
-        return reward
+        return isWin
 
     # Please always setup stack function before flipping coin
     def stack(self, money):
