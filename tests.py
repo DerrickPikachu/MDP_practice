@@ -1,22 +1,21 @@
 from game import Game
-import matplotlib.pyplot as plt
+from random import randint
 
 if __name__ == "__main__":
-    labels = ['True', 'False']
-    widths = 0.4
-    counter = [0, 0]
+    coinGame = Game(0.5)
 
-    coin = Game(0.8)
-    for i in range(1000):
-        if coin.flipCoin():
-            counter[0] += 1
-        else:
-            counter[1] += 1
+    print('initial status:')
+    print('player money = {}'.format(coinGame.showState()))
+    print('------------------------')
+    print('game start')
 
-    _, ax = plt.subplots()
-    ax.bar(labels, counter, widths)
-    ax.set_ylabel('Amount')
-    ax.set_title('Probability distribution')
-    ax.legend()
+    while not coinGame.gameOver:
+        stackCoin = randint(0, coinGame.showState())
+        coinGame.stack(stackCoin)
+        reward = coinGame.flipCoin()
+        print('stack {} coins'.format(stackCoin))
+        print('reward: {}'.format(reward))
+        print('new state: {}'.format(coinGame.showState()))
+        print('------------------------')
 
-    plt.show()
+    print('game over!')
