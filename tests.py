@@ -1,7 +1,8 @@
+from agent import MDP
 from game import Game
 from random import randint
 
-if __name__ == "__main__":
+def testGame():
     coinGame = Game(0.5)
 
     print('initial status:')
@@ -20,3 +21,12 @@ if __name__ == "__main__":
 
     print('game over!')
     print('reward: {}'.format(coinGame.reward))
+
+
+def testMDP():
+    mdp = MDP(0.40)
+    mdp.valueIteration()
+
+
+if __name__ == "__main__":
+    testMDP()
